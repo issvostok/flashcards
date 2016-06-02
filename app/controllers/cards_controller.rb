@@ -1,5 +1,4 @@
 class CardsController < ApplicationController
-  skip_before_filter :verify_authenticity_token, :only => [:create]
 
   def index
     @cards = Card.all
@@ -13,6 +12,10 @@ class CardsController < ApplicationController
     @card = Card.new
   end
 
+  def edit
+    @card = Card.find(params[:id])
+  end
+
   def create
     @card = Card.new(card_params)
     if @card.save!
@@ -22,18 +25,24 @@ class CardsController < ApplicationController
     end
   end
 
+  def update
+    @card = Card.find(params[:id])
+    if @card.update!(card_params)
+      redirect_to cards_path
+    else
+      render 'edit'
+    end
+  end
+
   def destroy
     @card = Card.find(params[:id]).destroy
     @card.save!
   end
 
-  def update
-  end
-
   private
 
   def card_params
-    params.require(:card).permit(:original_text, :translated_text, :review_date)
+    params.require(:card).permit(:original_text, :translated_text)
   end
 
 

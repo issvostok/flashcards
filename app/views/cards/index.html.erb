@@ -7,7 +7,10 @@
     <div>
       <%= card.review_date %>
     </div>
-      <%= button_to 'Delete', card_path(:id => card.id), method: :delete %>
-      <%= button_to 'Show', card_path(:id => card.id), method: :get %>
+      <%= button_to 'Delete', card_path(card),
+                    method: :delete,
+                    data: { confirm: 'Are you sure?' } %>
+      <%= button_to 'Edit', edit_card_path(card) %>
+      <%= button_to 'Show', card_path(card) %>
     <hr>
 <% end %>
