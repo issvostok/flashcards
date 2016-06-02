@@ -1,4 +1,4 @@
 Rails.application.routes.draw do
-  resources :cards, only: [:index, :show]
-  root to: 'home#index'
+  resources :cards
+  root to: 'home#index', as: :home
 end
