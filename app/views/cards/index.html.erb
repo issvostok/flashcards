@@ -1,7 +1,13 @@
 <% @cards.each do |card| %>
     <div>
-      <%= card.original_text %>
-      <%= card.translated_text %>
+      <strong>Original</strong>: <%= card.original_text %>
+      —
+      <strong>Translated</strong>: <%= card.translated_text %>
+    </div>
+    <div>
       <%= card.review_date %>
     </div>
+      <%= button_to 'Delete', card_path(:id => card.id), method: :delete %>
+      <%= button_to 'Show', card_path(:id => card.id), method: :get %>
+    <hr>
 <% end %>

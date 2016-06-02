@@ -1,4 +1,5 @@
 class CardsController < ApplicationController
+  skip_before_filter :verify_authenticity_token, :only => [:create]
 
   def index
     @cards = Card.all
@@ -15,15 +16,15 @@ class CardsController < ApplicationController
   def create
     @card = Card.new(card_params)
     if @card.save!
-      redirect_to home_path
+      redirect_to cards_path
     else
       render :new
     end
   end
 
-  def delete
-    @card = Card.find(params[:id]).delete
-    @card.save
+  def destroy
+    @card = Card.find(params[:id]).destroy
+    @card.save!
   end
 
   def update
