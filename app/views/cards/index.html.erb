@@ -1,7 +1,16 @@
 <% @cards.each do |card| %>
     <div>
-      <%= card.original_text %>
-      <%= card.translated_text %>
+      <strong>Original</strong>: <%= card.original_text %>
+      —
+      <strong>Translated</strong>: <%= card.translated_text %>
+    </div>
+    <div>
       <%= card.review_date %>
     </div>
+      <%= button_to 'Delete', card_path(card),
+                    method: :delete,
+                    data: { confirm: 'Are you sure?' } %>
+      <%= button_to 'Edit', edit_card_path(card) %>
+      <%= button_to 'Show', card_path(card) %>
+    <hr>
 <% end %>
