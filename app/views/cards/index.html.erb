@@ -1,7 +1,14 @@
 <% @cards.each do |card| %>
+  <div>
+    <strong>Original</strong>: <%= card.original_text %>
+    
+    <strong>Translated</strong>: <%= card.translated_text %>
+  </div>
     <div>
-      <%= card.original_text %>
-      <%= card.translated_text %>
       <%= card.review_date %>
-    </div>
+   </div>
+  <%= link_to 'Delete', card_path(card), method: :delete %>
+  <%= link_to 'Edit', edit_card_path(card) %>
+  <%= link_to 'Show', card_path(card) %>
+  <hr>
 <% end %>
