@@ -16,7 +16,7 @@
       <li><%= link_to 'Добавить карточку',  new_card_path %></li>
     </ul>
   </header>
-
+  <%= render partial: "shared/flash_messages" %>
   <%= yield %>
 
 </section>
