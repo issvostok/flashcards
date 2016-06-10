@@ -1,9 +1,17 @@
 development:
   adapter: postgresql
   encoding: unicode
-  database: blog_development
+  database: flashcards_development
   pool: 5
+  host: localhost
+  username: vostok
+  password: 22433536
 
+test:
+  adapter: postgresql
+  encoding: unicode
+  database: flashcards_test
+  pool: 5
   host: localhost
   username: vostok
   password: 22433536
