@@ -15,14 +15,13 @@ RSpec.describe HomeController, :type => :controller do
     end
   end
 
-  before do
-    @answer = '   lOl '
-    @card = Card.create(original_text: 'Lol', translated_text: 'laugh')
+  describe "#check_translation" do
+    it "should redirect to home_path with notice" do
+      card = Card.create(original_text: 'lol', translated_text: 'laugh')
+      get :check_translation, params: {id: card.id, answer: 'lol'} 
+      expect(flash[:notice]).to eq ("Correct")
+      expect(response).to redirect_to(home_path)
+    end
   end
-
-  it "#check_translation tests http-status and notice" do
-    result = CheckTranslation.call(answer: @answer, id: @card.id )
-    expect(result.notice).to eq "Correct"
-    expect(response).to have_http_status(200)
-  end
+  
 end
