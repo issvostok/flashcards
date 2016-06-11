@@ -5,9 +5,11 @@ class HomeController < ApplicationController
   end
 
   def check_translation
-    @card = Card.find(params[:id])
-    flash[:notice] = @card.check_translation(params[:answer]) ? "Correct" : "Incorrect"
-    redirect_to home_path
+    result = CheckTranslation.call(
+    answer: params[:answer],
+    id: params[:id]
+    )
+    redirect_to home_path, notice: result.notice
   end
 
 end
