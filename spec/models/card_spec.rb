@@ -29,4 +29,5 @@ RSpec.describe Card, :type => :model do
       expect(card.review_date).to eq(Date.current)
     end
   end
+  
 end

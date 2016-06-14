@@ -8,7 +8,7 @@ class Card < ApplicationRecord
     errors.add(:original_text, "Original can't be equal to translated") if self.original_text.downcase.strip == self.translated_text.downcase.strip
   end
 
-  scope :unreviewed, -> { where('review_date <= ?', Date.current).order('RANDOM()').first }
+  scope :unreviewed, -> { where('review_date <= ?', Date.current).order('RANDOM()') }
 
   protected
   def set_the_date
