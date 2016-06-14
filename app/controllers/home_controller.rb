@@ -1,7 +1,7 @@
 class HomeController < ApplicationController
   
   def index
-    @card = Card.unreviewed
+    @card = Card.unreviewed.first
   end
 
   def check_translation

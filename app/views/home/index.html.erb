@@ -1,5 +1,5 @@
 <p> Первый в мире удобный менеджер флеш-карточек. Именно так.</p>
-<% if @card.present?%>
+<% if @card.present? %>
   <%= form_tag check_translation_path do %>
     <div><%= @card.translated_text %></div>
     <div><%= @card.original_text %></div>
@@ -7,4 +7,6 @@
     <%= text_field_tag 'answer', nil, placeholder: "Your translate" %>
     <%= submit_tag "Check!", name: 'Submit' %>
   <% end %>
+<% else %>
+  <div>"Gratz! Rest a little, cuz cards not found!"</div>
 <% end %>
