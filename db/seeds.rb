@@ -6,6 +6,7 @@ Card.destroy_all
 
 selected_links = page.css("a[rel=nofollow]").map { |link| 'http://www.languagedaily.com' + link['href'] }
 
+user = User.create(email: 'bigdick@lol.com', password: 'giantwarmtits')
 selected_links.each do |link|
   page = Nokogiri::HTML(open(link))
   page.css('tr').each do |row|
@@ -13,6 +14,6 @@ selected_links.each do |link|
       translated = row.css('td')[2].text
     end
     original = row.css('td.bigLetter').text if translated
-    Card.create(original_text: original, translated_text: translated)
+    user.cards.create(original_text: original, translated_text: translated)
   end
 end
