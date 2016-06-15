@@ -25,9 +25,14 @@ RSpec.describe Card, :type => :model do
 
   context "#set_the_date" do
     it "set the date for current card" do
-      card = Card.create(original_text: "Hallo", translated_text: "Hi")
+      card = FactoryGirl.create(:card)
       expect(card.review_date).to eq(Date.current)
     end
+  end
+
+  it "should have many cards" do
+    t = Card.reflect_on_association(:user)
+    expect(t.macro).to eq(:belongs_to)
   end
   
 end

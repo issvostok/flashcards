@@ -2,8 +2,8 @@ require 'rails_helper'
 
 describe CheckTranslation do
   before do
-    @answer = '   lOl '
-    @card = Card.create(original_text: 'Lol', translated_text: 'laugh')
+    @answer = '   DracHeN '
+    @card = FactoryGirl.create(:card)
   end
 
   it "#call tests answer and original text for equality" do
