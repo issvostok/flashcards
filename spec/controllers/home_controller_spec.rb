@@ -17,8 +17,8 @@ RSpec.describe HomeController, :type => :controller do
 
   describe "#check_translation" do
     it "should redirect to home_path with notice" do
-      card = Card.create(original_text: 'lol', translated_text: 'laugh')
-      get :check_translation, params: {id: card.id, answer: 'lol'} 
+      card = FactoryGirl.create(:card)
+      get :check_translation, params: {id: card.id, answer: ' dRaChEn '} 
       expect(flash[:notice]).to eq ("Correct")
       expect(response).to redirect_to(home_path)
     end
