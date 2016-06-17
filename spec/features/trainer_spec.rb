@@ -3,7 +3,11 @@ require 'rails_helper'
 describe "The main page." do
 
   before do
-    @card = FactoryGirl.create(:card)
+    @user = FactoryGirl.create(:user)
+    visit login_path
+    fill_in('email', with: 'MyString')
+    fill_in('password', with: 'MyString')
+    click_button('Log In')
     visit home_path
   end
 
@@ -12,12 +16,16 @@ describe "The main page." do
   end
 
   it "User will see 'correct' if answer is ok." do
-    fill_in "answer", with: @card.original_text
+    card = FactoryGirl.create(:card, user_id: @user.id)
+    visit home_path
+    fill_in "answer", with: card.original_text
     click_button "Check!"
     expect(page).to have_content "Correct"
   end
 
   it "User will see 'incorrect' if answer isn't' ok." do
+    card = FactoryGirl.create(:card, user_id: @user.id)
+    visit home_path
     fill_in "answer", with: 'Sieg Heil!'
     click_button "Check!"
     expect(page).to have_content "Incorrect"

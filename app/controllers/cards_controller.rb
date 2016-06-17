@@ -1,22 +1,23 @@
 class CardsController < ApplicationController
   before_action :fetch_card, only: [:show, :edit, :update, :destroy]
+  before_action :require_login
 
   def index
-    @cards = Card.all
+    @cards = current_user.cards.all
   end
 
   def show
   end
 
   def new
-    @card = Card.new
+    @card = current_user.cards.new
   end
 
   def edit
   end
   
   def create
-    @card = Card.new(card_params)
+    @card = current_user.cards.new(card_params)
     if @card.save!
       redirect_to cards_path
     else

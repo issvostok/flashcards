@@ -2,6 +2,11 @@ require 'rails_helper'
 require 'rails-controller-testing'
 
 RSpec.describe CardsController, :type => :controller do
+  before do
+    @user = FactoryGirl.create(:user)
+    login_user
+  end
+
   describe "GET #index" do
     it "responds successfully with an HTTP 200 status code" do
       get :index

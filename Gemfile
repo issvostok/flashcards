@@ -27,6 +27,7 @@ gem 'jbuilder', '~> 2.0'
 # gem 'bcrypt', '~> 3.1.7'
 gem 'nokogiri'
 gem 'interactor-rails'
+gem 'sorcery'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
@@ -35,8 +36,8 @@ group :development, :test do
   gem 'byebug', platform: :mri
   gem 'capybara'
   gem 'factory_girl_rails'
-  gem 'rspec-rails'
-  gem 'rails-controller-testing'
+  gem 'rails-controller-testing', :git => 'https://github.com/rails/rails-controller-testing'
+  gem 'rspec-rails', '3.5.0.beta1'
 end
 
 group :development do
