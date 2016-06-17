@@ -1,7 +1,8 @@
 class HomeController < ApplicationController
+  before_action :require_login
   
   def index
-    @card = Card.unreviewed.first
+    @card = current_user.cards.unreviewed.first
   end
 
   def check_translation
