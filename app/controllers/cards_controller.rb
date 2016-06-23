@@ -7,6 +7,7 @@ class CardsController < ApplicationController
   end
 
   def show
+    @user = current_user
   end
 
   def new
@@ -15,9 +16,12 @@ class CardsController < ApplicationController
 
   def edit
   end
-  
+
   def create
     @card = current_user.cards.new(card_params)
+    if card_params[:remote_flashpicture_url]
+      @card.remote_flashpicture_url = card_params[:remote_flashpicture_url]
+    end
     if @card.save!
       redirect_to cards_path
     else
@@ -45,7 +49,7 @@ class CardsController < ApplicationController
   end
 
   def card_params
-    params.require(:card).permit(:original_text, :translated_text, :user_id)
+    params.require(:card).permit(:original_text, :translated_text, :user_id, :flashpicture, :remote_flashpicture_url)
   end
 
 

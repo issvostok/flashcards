@@ -28,6 +28,10 @@ gem 'jbuilder', '~> 2.0'
 gem 'nokogiri'
 gem 'interactor-rails'
 gem 'sorcery'
+gem 'carrierwave'
+gem 'image_magick'
+gem 'mini_magick'
+
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 

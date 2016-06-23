@@ -1,6 +1,7 @@
 <p> Первый в мире удобный менеджер флеш-карточек. Именно так.</p>
 <% if @card.present? %>
   <%= form_tag check_translation_path do %>
+    <%= image_tag @card.flashpicture_url(:thumb).to_s if @card.flashpicture? %>
     <div><%= @card.translated_text %></div>
     <div><%= @card.original_text %></div>
     <%= hidden_field_tag 'id', @card.id %>
