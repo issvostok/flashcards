@@ -18,14 +18,10 @@
 !/tmp/.keep
 
 # Ignore Byebug command history file.
-.byebug_history
-<<<<<<< HEAD
 .idea/*
-=======
-.idea
->>>>>>> 40b6e9f4fcddc1088547f66673b42d2f1ae0f273
 
-/public/uploads/
+/public/uploads/*
+public/uploads/*
 
 # Ignore application configuration
 /config/application.yml
