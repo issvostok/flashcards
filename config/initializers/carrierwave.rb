@@ -3,8 +3,8 @@ CarrierWave.configure do |config|
   config.fog_credentials = {
       provider:              'AWS',
       aws_access_key_id:     ENV['aws_access_key_id'],
-      aws_secret_access_key: ENV['aws_access_key_id'],
-      region:                'Oregon'                  # optional, defaults to 'us-east-1'
+      aws_secret_access_key: ENV['aws_secret_access_key'],
+      region:                'us-west-2'                 # optional, defaults to 'us-east-1'
 #      host:                  's3.example.com',             # optional, defaults to nil
 #      endpoint:              'https://s3.example.com:8080' # optional, defaults to nil
   }
