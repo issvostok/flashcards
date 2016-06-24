@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe "Logot." do
+describe "Logout." do
 
   it "User can logout" do
     @user = FactoryGirl.create(:user)

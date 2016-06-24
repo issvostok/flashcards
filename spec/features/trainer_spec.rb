@@ -30,4 +30,5 @@ describe "The main page." do
     click_button "Check!"
     expect(page).to have_content "Incorrect"
   end
+
 end
