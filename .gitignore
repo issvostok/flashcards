@@ -26,3 +26,6 @@
 >>>>>>> 40b6e9f4fcddc1088547f66673b42d2f1ae0f273
 
 /public/uploads/
+
+# Ignore application configuration
+/config/application.yml

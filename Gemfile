@@ -31,6 +31,8 @@ gem 'sorcery'
 gem 'carrierwave'
 gem 'image_magick'
 gem 'mini_magick'
+gem 'fog-aws'
+gem 'figaro'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
