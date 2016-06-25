@@ -1,5 +1,14 @@
-<%= simple_form_for @card do |f| %>
+<%= simple_form_for @card, :html => {:multipart => true} do |f| %>
+    <%= f.hidden_field :user_id %>
     <%= f.text_field :original_text, placeholder: 'Original Text' %>
     <%= f.text_field :translated_text, placeholder: 'Translated Text' %>
-    <%= f.button :submit %>
+    <div>
+      <strong>Choose picture associated to card: </strong>
+    </div>
+    <div>
+      <%= f.file_field :flashpicture %>
+      <%= f.label :remote_flashpicture_url, "or image URL" %>
+      <%= f.text_field :remote_flashpicture_url %>
+      <%= f.button :submit %>
+    </div>
 <% end %>

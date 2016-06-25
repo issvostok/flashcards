@@ -43,6 +43,10 @@
 .button_to {
     display: inline-block;
 }
+
+#new_card div{
+    padding: 10px;
+}
 /* MISC */
 
 .clearfix:after {content:".";display:block;clear:both;visibility:hidden;line-height:0;height:0;} html[xmlns].clearfix{display:block;} * html .clearfix{height:1%;}

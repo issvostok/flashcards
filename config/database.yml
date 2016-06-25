@@ -4,8 +4,8 @@ development:
   database: flashcards_development
   pool: 5
   host: localhost
-  username: vostok
-  password: 22433536
+  username: <%= ENV['db_user'] %>
+  password: <%= ENV['db_password'] %>
 
 test:
   adapter: postgresql
@@ -13,5 +13,5 @@ test:
   database: flashcards_test
   pool: 5
   host: localhost
-  username: vostok
-  password: 22433536
+  username: <%= ENV['db_user'] %>
+  password: <%= ENV['db_password'] %>

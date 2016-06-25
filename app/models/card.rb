@@ -1,6 +1,8 @@
 class Card < ApplicationRecord
   belongs_to :user
 
+  mount_uploader :flashpicture, FlashpictureUploader
+
   validates :user_id, presence: true
   validates :original_text, presence: true
   validate :equality_test, on: :create
