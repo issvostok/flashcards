@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   resources :users
   resources :cards
   resources :sessions
+  resources :decks
   
   root 'home#index', as: :home
   post 'check_translation', to: 'home#check_translation'

@@ -1,4 +1,5 @@
 class Card < ApplicationRecord
+  belongs_to :deck
   belongs_to :user
 
   mount_uploader :flashpicture, FlashpictureUploader

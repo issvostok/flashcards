@@ -1,5 +1,6 @@
 class User < ApplicationRecord
   authenticates_with_sorcery!
+  has_many :decks
   has_many :cards
 
   validates_confirmation_of :password
