@@ -35,5 +35,9 @@ RSpec.describe DecksController, type: :routing do
       expect(:delete => "/decks/1").to route_to("decks#destroy", :id => "1")
     end
 
+    it "routes to #set_current" do
+      expect(:get => "/decks/1/set_current?user_id=1").to route_to("decks#set_current", :user_id => "1", :deck_id => "1")
+    end
+
   end
 end

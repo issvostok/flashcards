@@ -11,17 +11,14 @@
 
   <tbody>
     <% @decks.each do |deck| %>
-      <%= form_tag set_current_path do %>
         <tr>
           <td><%= deck.title %></td>
           <td><%= link_to 'Show', deck %></td>
           <td><%= link_to 'Edit', edit_deck_path(deck) %></td>
-          <td><%= hidden_field_tag 'id', deck.id %></td>
           <td><%= link_to 'Destroy', deck, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-          <td><div class='submit-tag'><%= submit_tag "Set current" %></div></td>
+          <td><%= link_to "Set current", deck_set_current_path(deck_id: deck.id, user_id: current_user.id) %></td>
         </tr>
       <% end %>
-    <% end %>
   </tbody>
 </table>
 

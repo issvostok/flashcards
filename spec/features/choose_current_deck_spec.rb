@@ -10,7 +10,7 @@ describe "Choose current deck" do
     click_button('Log In')
     @deck = FactoryGirl.create(:deck, user_id: @user.id)
     visit decks_path
-    click_button('Set current')
+    click_link('Set current')
     expect(page).to have_content "Deck MyString is current now"
   end
 

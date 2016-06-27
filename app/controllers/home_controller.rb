@@ -2,8 +2,8 @@ class HomeController < ApplicationController
   before_action :require_login
   
   def index
-    if current_user.decks.current_deck.first != nil
-      @card = current_user.decks.current_deck.first.cards.unreviewed.first
+    if current_user.decks.find_current_deck
+      @card = current_user.decks.find_current_deck.cards.unreviewed.first
     else
       @card = current_user.cards.unreviewed.first
     end

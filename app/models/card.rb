@@ -15,6 +15,7 @@ class Card < ApplicationRecord
   end
 
   scope :unreviewed, -> { where('review_date <= ?', Date.current).order('RANDOM()') }
+  scope :current_deck, -> { decks.where(current: true) }
 
   protected
   def set_the_date

@@ -52,10 +52,15 @@ class DecksController < ApplicationController
   end
 
   def set_current
-    result = SetCurrent.call(
-        id: params[:id]
-    )
-    redirect_to decks_path, notice: result.notice
+    if current_user == Deck.find(params[:deck_id]).user
+      result = SetCurrentDeck.call(
+          deck_id: params[:deck_id],
+          user_id: params[:user_id]
+      )
+      redirect_to decks_path, notice: result.notice
+    else
+      redirect_to decks_path, notice: 'Permission denied'
+    end
   end
 
   private

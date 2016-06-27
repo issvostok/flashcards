@@ -28,7 +28,7 @@ RSpec.describe DecksController, type: :controller do
   describe '#set_current' do
     it 'should redirect to decks_path with notice' do
       deck = FactoryGirl.create(:deck, user_id: @user.id)
-      get :set_current, params: {id: deck.id}
+      get :set_current, params: {deck_id: deck.id, user_id: @user.id}
       expect(flash[:notice]).to eq ('Deck MyString is current now')
       expect(response).to redirect_to(decks_path)
     end
