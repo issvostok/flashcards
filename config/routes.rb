@@ -7,10 +7,9 @@ Rails.application.routes.draw do
   resources :cards
   resources :sessions
   resources :decks do
-    get 'set_current'
+    post 'set_current', on: :member
   end
   
   root 'home#index', as: :home
   post 'check_translation', to: 'home#check_translation'
-  # post 'set_current_deck', to: 'decks#set_current_deck'
 end

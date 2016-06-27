@@ -7,4 +7,8 @@ class User < ApplicationRecord
   validates :password, presence: true, on: :create
   validates :email, presence: true, uniqueness: true
 
+  def current_deck
+    decks.where(current: true).first
+  end
+
 end

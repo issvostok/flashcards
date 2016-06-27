@@ -36,7 +36,7 @@ RSpec.describe DecksController, type: :routing do
     end
 
     it "routes to #set_current" do
-      expect(:get => "/decks/1/set_current?user_id=1").to route_to("decks#set_current", :user_id => "1", :deck_id => "1")
+      expect(:post => "/decks/1/set_current").to route_to("decks#set_current", :id => "1")
     end
 
   end

@@ -2,14 +2,14 @@ class SetCurrentDeck
   include Interactor
 
   def call
-    if Deck.find(context.deck_id) && User.find(context.user_id)
-      deck = Deck.find(context.deck_id)
-      user = User.find(context.user_id)
+    if context.user.decks.where(id: context.id).count > 0
+      deck = Deck.find(context.id)
+      user = User.find(context.user)
       user.decks.update(current: false)
       deck.update(current: true)
       context.notice = "Deck #{deck.title} is current now"
     else
-      context.notice = "Deck wasn't found"
+      context.notice = "Deck wasn't found. Permission denied."
     end
   end
 

@@ -7,7 +7,7 @@ describe SetCurrentDeck do
   end
 
   it "#call setup current deck and send notice" do
-    interactor = SetCurrentDeck.call(deck_id: @deck.id, user_id: @user.id )
+    interactor = SetCurrentDeck.call(id: @deck.id, user: @user )
     expect(interactor).to be_a_success
     expect(interactor.notice).to eq "Deck MyString is current now"
   end

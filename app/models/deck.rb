@@ -4,8 +4,4 @@ class Deck < ApplicationRecord
 
   validates :title, presence: true
 
-  def self.find_current_deck
-    find_by(current: true)
-  end
-
 end
