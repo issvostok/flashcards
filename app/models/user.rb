@@ -7,6 +7,4 @@ class User < ApplicationRecord
   validates :password, presence: true, on: :create
   validates :email, presence: true, uniqueness: true
 
-  # scope :current_deck, -> { joins(:decks) }
-
 end
