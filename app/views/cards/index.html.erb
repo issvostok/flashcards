@@ -1,6 +1,7 @@
 <% @cards.each do |card| %>
   <div>
-    <strong>User ID</strong><%= card.user_id %>
+    <strong>User ID</strong>: <%= card.user_id %>
+    <strong>Deck ID</strong>: <%= card.deck_id %>
     <strong>Original</strong>: <%= card.original_text %>
     <strong>Translated</strong>: <%= card.translated_text %>
   </div>

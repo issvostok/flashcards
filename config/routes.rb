@@ -10,4 +10,5 @@ Rails.application.routes.draw do
   
   root 'home#index', as: :home
   post 'check_translation', to: 'home#check_translation'
+  post 'set_current', to: 'decks#set_current'
 end

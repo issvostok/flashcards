@@ -2,29 +2,21 @@ class DecksController < ApplicationController
   before_action :set_deck, only: [:show, :edit, :update, :destroy]
   before_action :require_login
 
-  # GET /decks
-  # GET /decks.json
   def index
     @decks = current_user.decks.all
   end
 
-  # GET /decks/1
-  # GET /decks/1.json
   def show
     @cards = @deck.cards
   end
 
-  # GET /decks/new
   def new
     @deck = current_user.decks.new
   end
 
-  # GET /decks/1/edit
   def edit
   end
 
-  # POST /decks
-  # POST /decks.json
   def create
     @deck = current_user.decks.new(deck_params)
 
@@ -39,8 +31,6 @@ class DecksController < ApplicationController
     end
   end
 
-  # PATCH/PUT /decks/1
-  # PATCH/PUT /decks/1.json
   def update
     respond_to do |format|
       if @deck.update(deck_params)
@@ -53,8 +43,6 @@ class DecksController < ApplicationController
     end
   end
 
-  # DELETE /decks/1
-  # DELETE /decks/1.json
   def destroy
     @deck.destroy
     respond_to do |format|
@@ -63,15 +51,20 @@ class DecksController < ApplicationController
     end
   end
 
+  def set_current
+    result = SetCurrent.call(
+        id: params[:id]
+    )
+    redirect_to decks_path, notice: result.notice
+  end
+
   private
-    # Use callbacks to share common setup or constraints between actions.
     def set_deck
       @deck = Deck.find(params[:id])
     end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-  def deck_params
-    params.require(:deck).permit(:title, :user_id)
-  end
+    def deck_params
+      params.require(:deck).permit(:title, :user_id)
+    end
 
 end

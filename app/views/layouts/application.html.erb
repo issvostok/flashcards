@@ -19,7 +19,12 @@
 
     <% if current_user %>
         <div>
-          Logged in as <%= current_user.email %>.
+          <div>Logged in as <%= current_user.email %>.</div>
+          <% if current_user.decks.current_deck.first != nil %>
+            <div>Current deck is <%= current_user.decks.current_deck.first.title %></div>
+          <% else %>
+          <div> Current deck is not selected </div>
+          <% end %>
           <div><%= link_to 'Настройки пользователя',  edit_user_path(current_user) %></div>
           <div><%= link_to 'Log out', logout_path %></div>
         </div>
