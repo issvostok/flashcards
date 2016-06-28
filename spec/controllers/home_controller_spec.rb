@@ -3,6 +3,7 @@ require 'rails-controller-testing'
 
 RSpec.describe HomeController, type: :controller do
   before do
+    @deck = FactoryGirl.create(:deck)
     @user = FactoryGirl.create(:user)
     login_user
   end
@@ -22,7 +23,7 @@ RSpec.describe HomeController, type: :controller do
 
   describe '#check_translation' do
     it 'should redirect to home_path with notice' do
-      card = Card.create(original_text: 'Drachen', translated_text:'Dragon', user_id: @user.id)
+      card = Card.create(original_text: 'Drachen', translated_text:'Dragon', user_id: @user.id, deck_id: @deck.id)
       get :check_translation, params: {id: card.id, answer: ' dRaChEn '}
       expect(flash[:notice]).to eq ('Correct')
       expect(response).to redirect_to(home_path)
