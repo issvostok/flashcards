@@ -22,6 +22,10 @@
 
 /public/uploads/*
 public/uploads/*
+public/assets/*
 
 # Ignore application configuration
 /config/application.yml
+
+# Ignore web-server for deployment
+Procfile
