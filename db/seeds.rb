@@ -7,6 +7,7 @@ Card.destroy_all
 selected_links = page.css("a[rel=nofollow]").map { |link| 'http://www.languagedaily.com' + link['href'] }
 
 user = User.create(email: 'bigdick@lol.com', password: 'giantwarmtits')
+
 selected_links.each do |link|
   page = Nokogiri::HTML(open(link))
   page.css('tr').each do |row|

@@ -3,6 +3,7 @@
     <%= f.collection_select :deck_id, current_user.decks.order(:title), :id, :title %>
     <%= f.text_field :original_text, placeholder: 'Original Text' %>
     <%= f.text_field :translated_text, placeholder: 'Translated Text' %>
+    <%= f.text_field :review_date, placeholder: 'Review Date'%>
     <div>
       <strong>Choose picture associated to card: </strong>
     </div>
