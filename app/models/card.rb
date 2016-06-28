@@ -5,6 +5,7 @@ class Card < ApplicationRecord
   mount_uploader :flashpicture, FlashpictureUploader
 
   validates :user_id, presence: true
+  validates :deck_id, presence: true
   validates :original_text, presence: true
   validate :equality_test, on: :create
   validates :translated_text, presence: true
