@@ -1,0 +1,9 @@
+<p id="notice"><%= notice %></p>
+
+<%= @deck.title %>
+<% @cards.each do |card| %>
+  <div><%= card.original_text %></div>
+<% end %>
+
+<%= link_to 'Edit', edit_deck_path(@deck) %> |
+<%= link_to 'Back', decks_path %>

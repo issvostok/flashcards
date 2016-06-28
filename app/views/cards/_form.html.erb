@@ -1,5 +1,6 @@
-<%= simple_form_for @card, :html => {:multipart => true} do |f| %>
+<%= simple_form_for (@card), :html => {:multipart => true} do |f| %>
     <%= f.hidden_field :user_id %>
+    <%= f.collection_select :deck_id, current_user.decks.order(:title), :id, :title %>
     <%= f.text_field :original_text, placeholder: 'Original Text' %>
     <%= f.text_field :translated_text, placeholder: 'Translated Text' %>
     <div>

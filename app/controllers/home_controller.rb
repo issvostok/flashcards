@@ -2,7 +2,11 @@ class HomeController < ApplicationController
   before_action :require_login
   
   def index
-    @card = current_user.cards.unreviewed.first
+    if current_user.current_deck
+      @card = current_user.current_deck.cards.unreviewed.first
+    else
+      @card = current_user.cards.unreviewed.first
+    end
   end
 
   def check_translation
