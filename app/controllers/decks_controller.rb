@@ -52,11 +52,11 @@ class DecksController < ApplicationController
   end
 
   def set_current
-      result = SetCurrentDeck.call(
-          id: params[:id],
-          user: current_user
-      )
-      redirect_to decks_path, notice: result.notice
+    result = SetCurrentDeck.call(
+      id: params[:id],
+      user: current_user
+    )
+    redirect_to decks_path, notice: result.notice
   end
 
   private

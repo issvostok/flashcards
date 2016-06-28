@@ -4,8 +4,8 @@ class SetCurrentDeck
   def call
     if context.user.decks.where(id: context.id).count > 0
       deck = Deck.find(context.id)
-      user = User.find(context.user)
-      user.decks.update(current: false)
+      this_user = User.find(context.user)
+      this_user.decks.update(current: false)
       deck.update(current: true)
       context.notice = "Deck #{deck.title} is current now"
     else

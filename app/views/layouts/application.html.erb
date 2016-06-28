@@ -23,7 +23,7 @@
           <% if current_user.current_deck %>
             <div>Current deck is <%= current_user.current_deck.title %></div>
           <% else %>
-          <div> Current deck is not selected </div>
+            <div> Current deck is not selected </div>
           <% end %>
           <div><%= link_to 'Настройки пользователя',  edit_user_path(current_user) %></div>
           <div><%= link_to 'Log out', logout_path %></div>

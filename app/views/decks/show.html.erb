@@ -2,7 +2,7 @@
 
 <%= @deck.title %>
 <% @cards.each do |card| %>
-<div><%= card.original_text %></div>
+  <div><%= card.original_text %></div>
 <% end %>
 
 <%= link_to 'Edit', edit_deck_path(@deck) %> |
