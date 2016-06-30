@@ -7,10 +7,12 @@ class CheckTranslation
       card.increment!(:correct_streak, 1)
       card.update(review_date: choose_leitner_time(card.correct_streak))
       context.notice = "Correct"
+      context.card = card
     else
       card.increment!(:incorrect_streak, 1)
-      card.update(correct_streak: 0) and card.update(incorrect_streak: 0) if card.incorrect_streak >= 3
+      card.update(correct_streak: 0, incorrect_streak: 0) if card.incorrect_streak >= 3
       context.notice = "Incorrect"
+      context.card = card
     end
   end
 
