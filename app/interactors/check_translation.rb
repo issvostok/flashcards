@@ -4,22 +4,33 @@ class CheckTranslation
   include Interactor
 
   def call
-    dl = DamerauLevenshtein
     card = Card.find(context.id)
-    if card.original_text.downcase.strip == context.answer.downcase.strip
+    context.card = card
+    original = simplify_word(card.original_text)
+    answer = simplify_word(context.answer) 
+    if original == answer
       card.increment!(:correct_streak, 1)
       card.update(review_date: choose_leitner_time(card.correct_streak), incorrect_streak: 0)
       context.notice = "Correct"
-      context.card = card
-    elsif dl.distance(card.original_text.downcase.strip, context.answer.downcase.strip) <= 2
-      context.notice = "Typo. Your answer is #{context.answer}, but correct answer is #{card.original_text}."
-      context.card = card
     else
-      card.increment!(:incorrect_streak, 1)
-      card.update(correct_streak: 0, incorrect_streak: 0) if card.incorrect_streak >= 3
-      context.notice = "Incorrect"
-      context.card = card
+      if original.length > 2 and dlevenstein_check(answer, original)
+        context.notice = "Typo. Your answer is #{answer}, but correct answer is #{original}."
+      else
+        card.increment!(:incorrect_streak, 1)
+        card.update(correct_streak: 0, incorrect_streak: 0) if card.incorrect_streak >= 3
+        context.notice = "Incorrect"
+      end
     end
+  end
+
+  def dlevenstein_check(user_answer, original_text)
+    dl = DamerauLevenshtein
+    dlevenstein_length = 1
+    dl.distance(user_answer, original_text) <= dlevenstein_length
+  end
+
+  def simplify_word(word)
+    word.downcase.strip
   end
 
   def choose_leitner_time(card_correct_streak)

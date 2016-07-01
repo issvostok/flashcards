@@ -26,7 +26,7 @@ RSpec.describe Card, :type => :model do
   context "#set_the_date" do
     it "set the date for current card" do
       card = FactoryGirl.create(:card)
-      expect(card.review_date).to eq(Date.current)
+      expect(card.review_date.strftime('%F')).to eq(DateTime.now.strftime('%F'))
     end
   end
 
