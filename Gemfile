@@ -34,7 +34,7 @@ gem 'image_magick'
 gem 'mini_magick'
 gem 'fog-aws'
 gem 'figaro'
-
+gem 'damerau-levenshtein'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
