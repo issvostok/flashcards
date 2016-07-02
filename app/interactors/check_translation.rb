@@ -3,30 +3,52 @@ require "damerau-levenshtein"
 class CheckTranslation
   include Interactor
 
+  TYPOS_ALLOWED = 1
+  FULLY_CORRECT_ANSWER = 0
+
   def call
-    card = Card.find(context.id)
-    context.card = card
-    original = simplify_word(card.original_text)
-    answer = simplify_word(context.answer) 
-    if original == answer
-      card.increment!(:correct_streak, 1)
-      card.update(review_date: choose_leitner_time(card.correct_streak), incorrect_streak: 0)
-      context.notice = "Correct"
+    context.card = Card.find(context.id)
+    original, answer = setup_words
+    if equal?(original, answer)
+      correct_answer!
+      context.notice = typos?(answer, original) == 'Fully correct' ? "Correct" :
+          "Typo. Your answer is #{answer}, but correct answer is #{original}."
     else
-      if original.length > 2 and dlevenstein_check(answer, original)
-        context.notice = "Typo. Your answer is #{answer}, but correct answer is #{original}."
-      else
-        card.increment!(:incorrect_streak, 1)
-        card.update(correct_streak: 0, incorrect_streak: 0) if card.incorrect_streak >= 3
-        context.notice = "Incorrect"
-      end
+      incorrect_answer!
+      context.notice = "Incorrect"
     end
   end
 
-  def dlevenstein_check(user_answer, original_text)
-    dl = DamerauLevenshtein
-    dlevenstein_length = 1
-    dl.distance(user_answer, original_text) <= dlevenstein_length
+  def equal?(original, answer)
+    if original.length > 2 
+      typos?(answer, original)
+    else
+      original == answer
+    end
+  end
+
+  def correct_answer!
+    context.card.increment!(:correct_streak, 1)
+    context.card.update(review_date: choose_leitner_time(context.card.correct_streak), incorrect_streak: 0)
+  end
+
+  def incorrect_answer!
+    context.card.increment!(:incorrect_streak, 1)
+    context.card.update(correct_streak: 0, incorrect_streak: 0) if context.card.incorrect_streak >= 3
+  end
+
+  def setup_words
+    original = simplify_word(context.card.original_text)
+    answer = simplify_word(context.answer) 
+    [original, answer]
+  end
+
+  def typos?(user_answer, original_text)
+    if DamerauLevenshtein.distance(user_answer, original_text) == FULLY_CORRECT_ANSWER
+      'Fully correct'
+    else
+      DamerauLevenshtein.distance(user_answer, original_text) <= TYPOS_ALLOWED
+    end
   end
 
   def simplify_word(word)
