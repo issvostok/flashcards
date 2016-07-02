@@ -14,12 +14,17 @@ describe CheckTranslation do
 
   it "#call set a currect Leitner time after correct answer" do
     interactor = CheckTranslation.call(answer: @answer, id: @card.id )
-    expect(interactor.card.review_date.strftime("%F")).to eq(1.month.since.strftime("%F"))
+    expect(interactor.card.review_date.strftime("%F")).to eq(1.month.since.strftime('%F'))
   end
 
   it "#call reset a correct/incorrect streak after three mistakes" do
     interactor = CheckTranslation.call(answer: 'mistake', id: @card.id)
     expect(interactor.card.correct_streak).to eq(0)
+  end
+
+  it "#call if user typo interactor show that" do
+    interactor = CheckTranslation.call(answer: 'dracen', id: @card.id)
+    expect(interactor.notice).to eq "Typo. Your answer is dracen, but correct answer is drachen."
   end
   
 end
