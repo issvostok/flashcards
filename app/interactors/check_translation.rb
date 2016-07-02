@@ -4,23 +4,29 @@ class CheckTranslation
   include Interactor
 
   TYPOS_ALLOWED = 1
-  FULLY_CORRECT_ANSWER = 0
 
   def call
     context.card = Card.find(context.id)
     original, answer = setup_words
     if equal?(original, answer)
       correct_answer!
-      context.notice = typos?(answer, original) == 'Fully correct' ? "Correct" :
-          "Typo. Your answer is #{answer}, but correct answer is #{original}."
+      context.notice = notice(original, answer)
     else
       incorrect_answer!
-      context.notice = "Incorrect"
+      context.notice = 'Incorrect.'
+    end
+  end
+
+  def notice(original, answer)
+    if original == answer
+      'Correct'
+    else
+      "Typo. Your answer is #{answer}, but correct answer is #{original}."
     end
   end
 
   def equal?(original, answer)
-    if original.length > 2 
+    if original.length > 2 and original != answer
       typos?(answer, original)
     else
       original == answer
@@ -44,11 +50,7 @@ class CheckTranslation
   end
 
   def typos?(user_answer, original_text)
-    if DamerauLevenshtein.distance(user_answer, original_text) == FULLY_CORRECT_ANSWER
-      'Fully correct'
-    else
-      DamerauLevenshtein.distance(user_answer, original_text) <= TYPOS_ALLOWED
-    end
+    DamerauLevenshtein.distance(user_answer, original_text) <= TYPOS_ALLOWED
   end
 
   def simplify_word(word)
