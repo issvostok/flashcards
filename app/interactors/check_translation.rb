@@ -2,34 +2,33 @@ require "damerau-levenshtein"
 
 class CheckTranslation
   include Interactor
-
+  
   TYPOS_ALLOWED = 1
 
   def call
     context.card = Card.find(context.id)
-    original, answer = setup_words
+    original, answer = setup_words()
     if equal?(original, answer)
       correct_answer!
-      context.notice = notice(original, answer)
+      context.notice = "Correct"
+    elsif typos?(original, answer)
+      correct_answer!
+      context.notice = "Typo. Your answer is #{answer}, but correct answer is #{original}."
     else
       incorrect_answer!
-      context.notice = 'Incorrect.'
-    end
-  end
-
-  def notice(original, answer)
-    if original == answer
-      'Correct'
-    else
-      "Typo. Your answer is #{answer}, but correct answer is #{original}."
+      context.notice = "Incorrect"
     end
   end
 
   def equal?(original, answer)
-    if original.length > 2 and original != answer
-      typos?(answer, original)
+    original == answer
+  end
+
+  def typos?(original, answer)
+    if original.length > 2
+      DamerauLevenshtein.distance(answer, original) <= TYPOS_ALLOWED
     else
-      original == answer
+      false
     end
   end
 
@@ -47,10 +46,6 @@ class CheckTranslation
     original = simplify_word(context.card.original_text)
     answer = simplify_word(context.answer) 
     [original, answer]
-  end
-
-  def typos?(user_answer, original_text)
-    DamerauLevenshtein.distance(user_answer, original_text) <= TYPOS_ALLOWED
   end
 
   def simplify_word(word)
